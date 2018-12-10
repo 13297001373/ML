@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 ##创造数据
 def load_data(path):
     data = []
@@ -11,8 +12,12 @@ def load_data(path):
     data = np.array(data)
     return data[:,0],data[:,1:]
 def plot_data(X,y):
-    ax = plt.figure()
-    plt.scatter(X[:,0],X[:,1],X[:,2],c=y)
+    plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+    plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
+    fig = plt.figure()
+    ax = Axes3D(fig)
+    ax.scatter(X[:,0],X[:,1],X[:,2],c=y)
+    plt.title('主成分分析PCA')
     plt.show()
 class PCA():
     def __init__(self,k):
@@ -36,13 +41,10 @@ def test():
     ##1.读取数据
     path = './data/wine.data'
     y,X = load_data(path)
+    ##2.数据降维
     pca = PCA(3)
-    # X = np.array([[-1,-2],
-    #               [-1,0],
-    #               [0,0],
-    #               [2,1],
-    #               [0,1]])
     X = pca.pca_transform(X)
+    ##3.绘制图形
     plot_data(X,y)
 if __name__ == '__main__':
     test()

@@ -1,3 +1,6 @@
-import numpy as np
-c = np.random.random((3,2))
-print(c)
+a = 4
+b = [1,23]
+if type(a) == int:
+    print('a')
+if type(b) == list:
+    print('b')
